@@ -4,9 +4,6 @@
 # ==============
 # Prompt
 # ==============
-# final edit for xonsh 0.8.12
-# Author: Qiushi Pan (@qqhann)
-
 def _git_prefix():
     import xonsh.tools as xt
 
