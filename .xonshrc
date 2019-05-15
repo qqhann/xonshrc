@@ -1,0 +1,62 @@
+# final edit for xonsh 0.8.12
+# Author: Qiushi Pan (@qqhann)
+
+# ==============
+# Prompt
+# ==============
+# final edit for xonsh 0.8.12
+# Author: Qiushi Pan (@qqhann)
+
+def _git_prefix():
+    import xonsh.tools as xt
+
+    prefix = $(git rev-parse --show-prefix).strip()
+    sep = xt.get_sep()
+
+    if len(prefix) == 0:
+        return prefix
+    else:
+        return sep + prefix if prefix[0] != sep else prefix
+
+$PROMPT_FIELDS['git_prefix'] = _git_prefix
+
+
+def _git_toplevel_or_cwd():
+    import xonsh.tools as xt
+    from xonsh.prompt.cwd import _replace_home
+
+    toplevel = $(git rev-parse --show-toplevel).strip()
+    pwd = toplevel if toplevel else $PWD
+
+    sep = xt.get_sep()
+    pwd = _replace_home(pwd).split(sep)
+    l = len(pwd)
+    leader = sep if l > 0 and len(pwd[0]) == 0 else ""
+    base = [i[0]
+            if ix != l - 1 and i[0] != '.' else i[0:2]
+            if ix != l - 1 else i for ix, i in enumerate(pwd) if len(i) > 0]
+    return leader + sep.join(base)
+
+$PROMPT_FIELDS['git_toplevel'] = _git_toplevel_or_cwd
+
+
+def _success_color():
+    if __xonsh__.history.rtns and __xonsh__.history.rtns[-1] != 0:
+        return '{#cc6666}'  # red    
+    else:
+        return '{#f0c674}'
+
+$PROMPT_FIELDS['success_color'] = _success_color
+
+$PROMPT = '\n{env_name}{BLUE}{user}@{hostname} {INTENSE_BLACK}[ {INTENSE_BLACK}{git_toplevel}{INTENSE_WHITE}{git_prefix} {INTENSE_BLACK}] {gitstatus}\n{success_color}{prompt_end}{NO_COLOR} '
+ 
+# ===============
+# Aliases
+# ===============
+aliases['gits'] = 'git status -sb'
+aliases['gita'] = 'git add -A'
+aliases['gitd'] = 'git diff'
+aliases['gitc'] = 'git commit'
+aliases['la'] = 'ls -a'
+aliases['ll'] = 'ls -la'
+aliases['vx'] = 'vi ~/.xonshrc'
