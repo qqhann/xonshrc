@@ -1,3 +1,7 @@
+# XONSH WIZARD START
+source-bash --login True --sourcer source --suppress-skip-message "echo loading xonsh foreign shell"
+# XONSH WIZARD END
+
 # final edit for xonsh 0.8.12
 # Author: Qiushi Pan (@qqhann)
 
