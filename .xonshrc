@@ -1,9 +1,9 @@
+# final edit for xonsh 0.8.12
+# Author: Qiushi Pan (@qqhann)
+
 # XONSH WIZARD START
 source-bash --login True --sourcer source --suppress-skip-message "echo loading xonsh foreign shell"
 # XONSH WIZARD END
-
-# final edit for xonsh 0.8.12
-# Author: Qiushi Pan (@qqhann)
 
 # ==============
 # Prompt
@@ -49,7 +49,7 @@ def _success_color():
 
 $PROMPT_FIELDS['success_color'] = _success_color
 
-$PROMPT = '\n{env_name}{BLUE}{user}@{hostname} {INTENSE_BLACK}[ {INTENSE_BLACK}{git_toplevel}{INTENSE_WHITE}{git_prefix} {INTENSE_BLACK}] {gitstatus}\n{success_color}{prompt_end}{NO_COLOR} '
+$PROMPT = '{env_name}{BLUE}{user}@{hostname} {INTENSE_BLACK}[ {INTENSE_BLACK}{git_toplevel}{INTENSE_WHITE}{git_prefix} {INTENSE_BLACK}] {gitstatus}\n{success_color}{prompt_end}{NO_COLOR} '
  
 # ===============
 # Aliases
